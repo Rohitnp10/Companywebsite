@@ -1,93 +1,184 @@
-# companywebsite
+# Softrix International — Corporate Website (Static, Dynamic-Ready)
 
+A production-quality **static** Laravel + Blade + Tailwind CSS website for
+Softrix International Pvt. Ltd., architected so it can become a **fully
+dynamic, database-backed website later with minimal changes** to the
+frontend.
 
+---
 
-## Getting started
+## 1. Getting Started
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+This project was scaffolded outside of an environment with Composer/npm
+registry access to install dependencies, so you'll need to run the
+install steps yourself locally:
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+```bash
+# 1. Install PHP dependencies
+composer install
 
-## Add your files
+# 2. Copy the environment file and generate an app key
+cp .env.example .env
+php artisan key:generate
 
-* [Create](https://docs.gitlab.com/user/project/repository/web_editor/#create-a-file) or [upload](https://docs.gitlab.com/user/project/repository/web_editor/#upload-a-file) files
-* [Add files using the command line](https://docs.gitlab.com/topics/git/add_files/#add-files-to-a-git-repository) or push an existing Git repository with the following command:
+# 3. Install JS dependencies
+npm install
+
+# 4. Run the dev servers (two terminals, or use the combined script below)
+php artisan serve
+npm run dev
+```
+
+Then visit `http://127.0.0.1:8000`.
+
+> No database setup is required for this phase — the site has no
+> models, migrations, or admin panel. It reads all content from static
+> PHP classes in `app/Content/`.
+
+---
+
+## 2. Architecture at a Glance
 
 ```
-cd existing_repo
-git remote add origin https://gitlab.com/company5184821/companywebsite.git
-git branch -M main
-git push -uf origin main
+Static Content Class  →  Controller  →  Blade Component  →  UI
+   (app/Content/*)        (app/Http/Controllers/*)   (resources/views/**)
 ```
 
-## Integrate with your tools
+- **Presentation layer** — `resources/views/` (layouts, components, pages)
+- **Content layer** — `app/Content/*.php` (plain PHP arrays, shaped like future DB rows)
+- **Configuration layer** — `config/company.php`, `config/navigation.php`, `config/seo.php`
+- **Routing layer** — `routes/web.php` (named routes, controller-backed)
 
-* [Set up project integrations](https://gitlab.com/company5184821/companywebsite/-/settings/integrations)
+Nothing in a Blade file contains hard-coded company copy, addresses, or
+navigation links — everything flows in through a controller or a config
+call, e.g. `config('company.address_line')` or `ServicesContent::active()`.
 
-## Collaborate with your team
+### Why this matters
 
-* [Invite team members and collaborators](https://docs.gitlab.com/user/project/members/)
-* [Create a new merge request](https://docs.gitlab.com/user/project/merge_requests/creating_merge_requests/)
-* [Automatically close issues from merge requests](https://docs.gitlab.com/user/project/issues/managing_issues/#closing-issues-automatically)
-* [Enable merge request approvals](https://docs.gitlab.com/user/project/merge_requests/approvals/)
-* [Set auto-merge](https://docs.gitlab.com/user/project/merge_requests/auto_merge/)
+When you're ready to go dynamic, the migration path is:
 
-## Test and Deploy
+1. Create migrations + Eloquent models (`Service`, `Product`, `Industry`, `Project`, `Job`, etc.)
+2. Replace the static content classes' method bodies with Eloquent queries, e.g.:
+   ```php
+   // Before
+   public static function active(): array { /* static array */ }
 
-Use the built-in continuous integration in GitLab.
+   // After
+   public static function active(): array
+   {
+       return Service::where('is_active', true)->orderBy('sort_order')->get()->toArray();
+   }
+   ```
+3. Add an admin/CMS interface (Filament, Nova, or a custom panel) to manage those models.
+4. **The Blade components, layouts, and routes do not need to change**, because
+   they were always fed arrays/collections with the same field names.
 
-* [Get started with GitLab CI/CD](https://docs.gitlab.com/ci/quick_start/)
-* [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/user/application_security/sast/)
-* [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/topics/autodevops/requirements/)
-* [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/user/clusters/agent/)
-* [Set up protected environments](https://docs.gitlab.com/ci/environments/protected_environments/)
+---
 
-***
+## 3. Key Directories
 
-# Editing this README
+```
+app/
+├── Content/                  Static "content provider" classes (one per section)
+│   ├── CompanyContent.php    Wraps config/company.php
+│   ├── HomeContent.php
+│   ├── AboutContent.php
+│   ├── ServicesContent.php
+│   ├── SolutionsContent.php  (Products/Solutions)
+│   ├── IndustriesContent.php
+│   ├── ProjectsContent.php
+│   ├── CareersContent.php
+│   └── ContactContent.php
+└── Http/Controllers/
+    ├── HomeController.php
+    ├── AboutController.php
+    ├── ServicesController.php
+    ├── SolutionsController.php
+    ├── IndustriesController.php
+    ├── ProjectsController.php
+    ├── CareersController.php
+    └── ContactController.php  (has index() + a demo-only store())
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
+config/
+├── company.php     Single source of truth: name, tagline, email, phone,
+│                   address/city/country, social links, logo paths
+├── navigation.php  Primary nav, CTA, and footer link columns (uses route names)
+└── seo.php         Default SEO fallbacks used by <x-layout.seo>
 
-## Suggestions for a good README
+resources/views/
+├── layouts/app.blade.php          Root HTML layout
+├── components/
+│   ├── layout/seo.blade.php       <x-layout.seo :seo="$seo" />
+│   ├── navigation/                Navbar (Alpine mobile menu), footer, social links
+│   ├── buttons/                   Primary / secondary buttons
+│   ├── sections/                  Section heading, CTA band, page header, hero visual
+│   ├── cards/                     Service / product / industry / project / job / feature cards
+│   ├── forms/contact-form.blade.php
+│   └── icons/icon.blade.php       Self-contained SVG icon registry (no external icon package)
+└── pages/                         home, about, services, solutions, industries,
+                                    projects, careers, contact
+```
 
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+---
 
-## Name
-Choose a self-explaining name for your project.
+## 4. Changing the Company Location (or Any Company Info)
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+Everything lives in **one file**: `config/company.php`. For example, to
+move from Kathmandu to Dubai:
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+```php
+'address_line' => 'Dubai, UAE',
+'city' => 'Dubai',
+'country' => 'UAE',
+'map_embed_url' => 'https://maps.google.com/maps?q=Dubai,UAE&output=embed',
+```
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+No Blade file needs to be touched — the footer, contact page, and any
+future page that shows the address all read from this config.
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+---
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+## 5. Editing Content
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+To change site copy, edit the relevant class in `app/Content/`. For example,
+to add a 9th service, add a new array entry to `ServicesContent::all()`
+with the next `id`/`sort_order` — the Blade view (`pages/services.blade.php`)
+and `<x-cards.service-card>` component require no changes.
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+---
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+## 6. Contact Form — Current State
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+The contact form (`resources/views/components/forms/contact-form.blade.php`)
+is fully wired for CSRF protection and posts to `POST /contact`
+(`routes/web.php` → `ContactController@store`). **It currently validates
+input but does not persist messages or send email** — see the `TODO`
+comments in `ContactController::store()` for the exact change needed
+once a `ContactMessage` model/mailable exists. The UI already shows a
+"demo submission" confirmation state so visitors aren't misled about
+what happens to their message.
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+---
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+## 7. Design Tokens
 
-## License
-For open source projects, say how it is licensed.
+Colors, typography, spacing, and animation are centralized in
+`tailwind.config.js` (`theme.extend.colors.brand`) and
+`resources/css/app.css` (typography utility classes like `.h-hero`,
+`.h-section`, `.text-body`). Change the palette or type scale in one
+place and it propagates everywhere.
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+---
+
+## 8. What's Intentionally Not Included (Yet)
+
+Per the project brief, this phase deliberately excludes:
+
+- Admin panel / CMS
+- Database models or migrations for website content
+- User authentication
+- Real contact-form persistence or email delivery
+- Fabricated client logos, testimonials, or usage statistics
+
+All of the above are designed to slot in later without reworking the
+frontend — see Section 2.
