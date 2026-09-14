@@ -10,7 +10,11 @@ class IndustriesController extends Controller
     public function index(): View
     {
         return view('pages.industries', [
+            'page' => IndustriesContent::page(),
+            'focus' => IndustriesContent::focus(),
+            'approach' => IndustriesContent::approach(),
             'industries' => IndustriesContent::active(),
+            'cta' => IndustriesContent::cta(),
             'seo' => IndustriesContent::seo(),
         ]);
     }

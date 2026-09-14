@@ -3,10 +3,8 @@
 {{--
     Static-phase contact form.
 
-    This posts to route('contact.store') using standard Laravel form
-    conventions (@csrf, named fields, @error helpers) even though the
-    backend does not persist submissions yet. When the dynamic phase adds
-    real handling (DB + email), this markup requires no changes.
+    Posts to route('contact.store') with CSRF, named fields, and error helpers.
+    When real handling is added (DB + email), this markup requires no changes.
 --}}
 
 @if(session('status') === 'demo-submitted')

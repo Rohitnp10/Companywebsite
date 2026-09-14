@@ -16,15 +16,60 @@ document.addEventListener('alpine:init', () => {
 
 Alpine.start();
 
-// Scroll-reveal: plain IntersectionObserver over `[data-reveal]` elements —
-// deliberately not an Alpine directive. There's no reactive state here, and
-// directive-only elements with no `x-data` ancestor aren't guaranteed to be
-// visited by Alpine's initial walk, so vanilla JS is both simpler and more
-// reliable. Adds `.reveal-in` the first time an element crosses into view,
-// then stops observing it. Respects prefers-reduced-motion via CSS (app.css).
+function prefersReducedMotion() {
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
+function activateIconLive(root) {
+    const icons = root.matches?.('[data-icon-live]')
+        ? [root]
+        : Array.from(root.querySelectorAll?.('[data-icon-live]') ?? []);
+
+    icons.forEach((icon, index) => {
+        window.setTimeout(() => icon.classList.add('icon-live'), index * 70);
+    });
+}
+
+function prepareStaggerGroups() {
+    document.querySelectorAll('[data-reveal-stagger]').forEach((group) => {
+        const step = Number(group.getAttribute('data-reveal-stagger')) || 70;
+        const max = Number(group.getAttribute('data-reveal-stagger-max')) || 8;
+        const variants = ['data-reveal-scale', 'data-reveal-left', 'data-reveal-right', 'data-reveal-fade'];
+
+        Array.from(group.children).forEach((child, index) => {
+            if (!child.hasAttribute('data-reveal')) {
+                child.setAttribute('data-reveal', '');
+            }
+
+            if (!child.hasAttribute('data-reveal-delay')) {
+                child.setAttribute('data-reveal-delay', String(Math.min(index, max) * step));
+            }
+
+            variants.forEach((attr) => {
+                if (group.hasAttribute(attr) && !child.hasAttribute(attr)) {
+                    child.setAttribute(attr, '');
+                }
+            });
+        });
+    });
+}
+
 function initScrollReveal() {
+    prepareStaggerGroups();
+
     const els = document.querySelectorAll('[data-reveal]');
-    if (!els.length) return;
+    if (!els.length) {
+        activateIconLive(document);
+        return;
+    }
+
+    if (prefersReducedMotion()) {
+        els.forEach((el) => {
+            el.classList.add('reveal-init', 'reveal-in');
+            activateIconLive(el);
+        });
+        return;
+    }
 
     const observer = new IntersectionObserver(
         (entries) => {
@@ -32,20 +77,42 @@ function initScrollReveal() {
                 if (!entry.isIntersecting) return;
 
                 const el = entry.target;
-                requestAnimationFrame(() => el.classList.add('reveal-in'));
-                el.addEventListener('transitionend', () => { el.style.willChange = 'auto'; }, { once: true });
+                requestAnimationFrame(() => {
+                    el.classList.add('reveal-in');
+                    activateIconLive(el);
+                });
+                el.addEventListener('transitionend', () => {
+                    el.style.willChange = 'auto';
+                }, { once: true });
                 observer.unobserve(el);
             });
         },
-        { threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
+        { threshold: 0.08, rootMargin: '0px 0px -6% 0px' }
     );
 
     els.forEach((el) => {
         el.classList.add('reveal-init');
+
         if (el.hasAttribute('data-reveal-scale')) el.classList.add('reveal-scale');
+        if (el.hasAttribute('data-reveal-left')) el.classList.add('reveal-left');
+        if (el.hasAttribute('data-reveal-right')) el.classList.add('reveal-right');
+        if (el.hasAttribute('data-reveal-fade')) el.classList.add('reveal-fade');
 
         const delay = Number(el.getAttribute('data-reveal-delay')) || 0;
         if (delay) el.style.transitionDelay = `${delay}ms`;
+
+        // Already in view on load — animate after a short paint delay
+        const rect = el.getBoundingClientRect();
+        const inView = rect.top < window.innerHeight * 0.92 && rect.bottom > 0;
+        if (inView) {
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    el.classList.add('reveal-in');
+                    activateIconLive(el);
+                });
+            });
+            return;
+        }
 
         observer.observe(el);
     });

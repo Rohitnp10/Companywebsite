@@ -36,15 +36,18 @@
         'arrow-right' => 'M5 12h14M13 6l6 6-6 6',
         'check' => 'M20 6 9 17l-5-5',
         'circle' => 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z',
-        'sun' => 'M12 3v2M12 19v2M5 5l1.5 1.5M17.5 17.5 19 19M3 12h2M19 12h2M5 19l1.5-1.5M17.5 6.5 19 5M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z',
-        'moon' => 'M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5Z',
+        'sun' => 'M12 4v1.5M12 18.5V20M5.6 5.6l1.1 1.1M17.3 17.3l1.1 1.1M4 12h1.5M18.5 12H20M5.6 18.4l1.1-1.1M17.3 6.7l1.1-1.1M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z',
+        'moon' => 'M21 14.2A8.5 8.5 0 1 1 9.8 3a7 7 0 0 0 11.2 11.2Z',
+        'mail' => 'M4 6h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1ZM3.5 7.5 12 13l8.5-5.5',
+        'phone' => 'M6.5 3.5h3l1.5 4-2 1.5a12 12 0 0 0 5 5l1.5-2 4 1.5v3A2 2 0 0 1 17.5 18 14.5 14.5 0 0 1 3 6.5a2 2 0 0 1 2-2 2 2 0 0 1 1.5-.5Z',
+        'map-pin' => 'M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11ZM12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z',
     ];
 
     $path = $paths[$name] ?? $paths['circle'];
 @endphp
 
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-     stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"
-     {{ $attributes->merge(['class' => $class]) }}>
-    <path d="{{ $path }}" />
+     stroke-linecap="round" stroke-linejoin="round"
+     {{ $attributes->merge(['class' => $class, 'stroke-width' => '1.75']) }}>
+    <path d="{{ $path }}" pathLength="100" />
 </svg>

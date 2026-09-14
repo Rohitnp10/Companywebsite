@@ -41,23 +41,25 @@ export default {
                     muted: 'rgb(var(--color-muted) / <alpha-value>)',
                     border: 'rgb(var(--color-border) / <alpha-value>)',
 
-                    // Yellow/gold brand accent — the hex differs per theme (a
-                    // richer gold on white, a brighter gold on charcoal) so it
-                    // reads correctly in both, hence a CSS var rather than a
-                    // fixed hex like `primary` above.
+                    // Royal Blue brand accent (#305CDE) — same hex in both
+                    // themes; still a CSS var (not a fixed hex like `primary`
+                    // above) because hover/active shades flip direction
+                    // between light and dark surfaces.
                     accent: 'rgb(var(--color-accent) / <alpha-value>)',
                     'accent-hover': 'rgb(var(--color-accent-hover) / <alpha-value>)',
-                    'accent-soft': 'rgb(var(--color-accent-soft) / <alpha-value>)',
+                    'accent-dark': 'rgb(var(--color-accent-dark) / <alpha-value>)',
 
                     success: 'rgb(var(--color-success) / <alpha-value>)',
                     danger: 'rgb(var(--color-danger) / <alpha-value>)',
+                    warning: 'rgb(var(--color-warning) / <alpha-value>)',
                 },
             },
             boxShadow: {
                 soft: '0 1px 2px 0 rgb(15 23 42 / 0.04), 0 4px 12px -2px rgb(15 23 42 / 0.06)',
                 'soft-lg': '0 8px 24px -4px rgb(15 23 42 / 0.10), 0 2px 8px -2px rgb(15 23 42 / 0.06)',
-                // Subtle gold glow for primary-button hover / selected states.
-                glow: '0 10px 28px -8px rgb(var(--color-accent) / 0.45), 0 0 0 1px rgb(var(--color-accent) / 0.2)',
+                // Subtle Royal Blue glow for primary-button hover / selected states —
+                // deliberately soft, never a neon/gaming-style glow.
+                glow: '0 8px 20px -6px rgb(var(--color-accent) / 0.35), 0 0 0 1px rgb(var(--color-accent) / 0.18)',
             },
             keyframes: {
                 fadeIn: {

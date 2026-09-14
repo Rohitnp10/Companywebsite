@@ -3,9 +3,8 @@
 {{--
     Self-contained animated product mockup for the Restaurant Management
     System — a browser-chrome frame that auto-cycles through representative
-    screens (Dashboard, Orders, Tables, Billing). Built entirely from
-    Tailwind + Alpine, no external screenshots/video — this project has none
-    yet, so this stands in as the "product demo" until real capture exists.
+    screens (Dashboard, Orders, Tables, Billing). No external screenshots
+    or video yet, so this stands in as the product demo until real capture exists.
 --}}
 <div
     x-data="{
@@ -62,22 +61,22 @@
 
                     {{-- DASHBOARD --}}
                     <div class="demo-screen absolute inset-0 p-4 sm:p-5" x-show="screen === 0" x-transition:enter="transition ease-out duration-500" x-transition:enter-start="opacity-0 translate-x-3" x-transition:enter-end="opacity-100 translate-x-0" x-cloak>
-                        <div class="flex items-center justify-between">
-                            <h4 class="text-sm font-semibold text-brand-heading">Today's Overview</h4>
-                            <span class="text-[11px] text-brand-muted">Downtown Branch</span>
+                        <div class="flex items-start justify-between gap-2">
+                            <h4 class="text-sm font-semibold leading-snug text-brand-heading">Today's Overview</h4>
+                            <span class="mt-0.5 shrink-0 whitespace-nowrap text-[11px] text-brand-muted">Downtown Branch</span>
                         </div>
-                        <div class="mt-3 grid grid-cols-3 gap-2.5">
-                            <div class="rounded-lg border border-brand-border bg-brand-surface p-2.5">
-                                <p class="text-[10px] uppercase tracking-wide text-brand-muted">Orders</p>
-                                <p class="mt-1 text-lg font-bold text-brand-heading">128</p>
+                        <div class="mt-3 grid grid-cols-3 gap-2">
+                            <div class="overflow-hidden rounded-lg border border-brand-border bg-brand-surface p-2 sm:p-2.5">
+                                <p class="truncate text-[10px] uppercase tracking-wide text-brand-muted">Orders</p>
+                                <p class="mt-1 truncate text-sm font-bold text-brand-heading sm:text-lg">128</p>
                             </div>
-                            <div class="rounded-lg border border-brand-border bg-brand-surface p-2.5">
-                                <p class="text-[10px] uppercase tracking-wide text-brand-muted">Revenue</p>
-                                <p class="mt-1 text-lg font-bold text-brand-heading">Rs 3,240</p>
+                            <div class="overflow-hidden rounded-lg border border-brand-border bg-brand-surface p-2 sm:p-2.5">
+                                <p class="truncate text-[10px] uppercase tracking-wide text-brand-muted">Revenue</p>
+                                <p class="mt-1 truncate text-sm font-bold text-brand-heading sm:text-lg">Rs 3,240</p>
                             </div>
-                            <div class="rounded-lg border border-brand-border bg-brand-surface p-2.5">
-                                <p class="text-[10px] uppercase tracking-wide text-brand-muted">Tables Full</p>
-                                <p class="mt-1 text-lg font-bold text-brand-heading">9/14</p>
+                            <div class="overflow-hidden rounded-lg border border-brand-border bg-brand-surface p-2 sm:p-2.5">
+                                <p class="truncate text-[10px] uppercase tracking-wide text-brand-muted">Tables</p>
+                                <p class="mt-1 truncate text-sm font-bold text-brand-heading sm:text-lg">9/14</p>
                             </div>
                         </div>
                         <div class="mt-4 flex h-24 items-end gap-2 rounded-lg border border-brand-border bg-brand-surface p-3">
@@ -99,7 +98,7 @@
                     <div class="demo-screen absolute inset-0 p-4 sm:p-5" x-show="screen === 1" x-transition:enter="transition ease-out duration-500" x-transition:enter-start="opacity-0 translate-x-3" x-transition:enter-end="opacity-100 translate-x-0" x-cloak>
                         <div class="flex items-center justify-between">
                             <h4 class="text-sm font-semibold text-brand-heading">Active Orders</h4>
-                            <span class="rounded-full bg-brand-accent px-2.5 py-1 text-[10px] font-semibold text-brand-primary">+ New Order</span>
+                            <span class="rounded-full bg-brand-accent px-2.5 py-1 text-[10px] font-semibold text-white">+ New Order</span>
                         </div>
                         <div class="mt-3 space-y-2">
                             @foreach([
@@ -114,7 +113,7 @@
                                     </div>
                                     <span @class([
                                         'rounded-full px-2 py-0.5 text-[10px] font-semibold',
-                                        'bg-amber-500/10 text-amber-500' => $order[3] === 'Preparing',
+                                        'bg-brand-warning/10 text-brand-warning' => $order[3] === 'Preparing',
                                         'bg-brand-success/10 text-brand-success' => $order[3] === 'Ready',
                                         'bg-brand-muted/10 text-brand-muted' => $order[3] === 'Served',
                                     ])>{{ $order[3] }}</span>
@@ -132,7 +131,7 @@
                                     'flex aspect-square flex-col items-center justify-center gap-1 rounded-lg border text-[10px] font-semibold',
                                     'border-brand-danger/30 bg-brand-danger/10 text-brand-danger' => $state === 'occupied',
                                     'border-brand-success/30 bg-brand-success/10 text-brand-success' => $state === 'available',
-                                    'border-amber-400/30 bg-amber-500/10 text-amber-500' => $state === 'reserved',
+                                    'border-brand-warning/30 bg-brand-warning/10 text-brand-warning' => $state === 'reserved',
                                 ])>
                                     <span>T{{ $i + 1 }}</span>
                                     <span class="text-[8px] font-medium capitalize opacity-80">{{ $state }}</span>

@@ -12,14 +12,12 @@
 return [
 
     'primary' => [
-        ['label' => 'Home', 'route' => 'home'],
         ['label' => 'About', 'route' => 'about'],
         ['label' => 'Services', 'route' => 'services'],
         ['label' => 'Solutions', 'route' => 'solutions'],
         ['label' => 'Industries', 'route' => 'industries'],
         ['label' => 'Projects', 'route' => 'projects'],
         ['label' => 'Careers', 'route' => 'careers'],
-        ['label' => 'Contact', 'route' => 'contact'],
     ],
 
     'cta' => [

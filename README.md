@@ -1,9 +1,8 @@
 # Softrix International — Corporate Website (Static, Dynamic-Ready)
 
-A production-quality **static** Laravel + Blade + Tailwind CSS website for
-Softrix International Pvt. Ltd., architected so it can become a **fully
-dynamic, database-backed website later with minimal changes** to the
-frontend.
+A production-quality **static** corporate website for Softrix International
+Pvt. Ltd., architected so it can become a **fully dynamic, database-backed
+website later with minimal changes** to the frontend.
 
 ---
 

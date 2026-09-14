@@ -31,6 +31,8 @@ class SolutionsContent
                     'Billing, payments & reporting',
                 ],
                 'icon' => 'utensils',
+                'image' => asset('images/home/product-restaurant-thumb.jpg'),
+                'image_alt' => 'Restaurant management software interface on a tablet',
                 'is_active' => true,
                 'sort_order' => 1,
             ],
@@ -49,6 +51,8 @@ class SolutionsContent
                     'Billing & invoicing',
                 ],
                 'icon' => 'building-2',
+                'image' => asset('images/home/product-hotel-thumb.jpg'),
+                'image_alt' => 'Hotel operations software dashboard preview',
                 'is_active' => true,
                 'sort_order' => 2,
             ],
@@ -67,6 +71,8 @@ class SolutionsContent
                     'Billing & invoicing',
                 ],
                 'icon' => 'heart-pulse',
+                'image' => asset('images/home/product-dental-thumb.jpg'),
+                'image_alt' => 'Dental clinic management software preview',
                 'is_active' => true,
                 'sort_order' => 3,
             ],
@@ -92,13 +98,75 @@ class SolutionsContent
         return null;
     }
 
+    public static function page(): array
+    {
+        return [
+            'eyebrow' => 'Products',
+            'title' => 'Operational systems for the businesses that run on them',
+            'lede' => 'Restaurant Management System is ready today. Hotel and Dental systems are in active development — with honest status on every product.',
+            'description' => 'Restaurant Management System is live and in use today. Hotel and Dental Management Systems are in active development.',
+            'primary_button' => [
+                'label' => "Let's Talk",
+                'route' => 'contact',
+            ],
+            'secondary_button' => [
+                'label' => 'Our Services',
+                'route' => 'services',
+            ],
+        ];
+    }
+
+    public static function flagship(): array
+    {
+        $ready = collect(self::active())->firstWhere('status', 'ready');
+
+        return [
+            'eyebrow' => 'Flagship Product',
+            'title' => $ready['title'] ?? 'Restaurant Management System',
+            'body' => $ready['description'] ?? '',
+            'capabilities' => $ready['capabilities'] ?? [],
+            'category' => $ready['category'] ?? 'Hospitality',
+            'icon' => $ready['icon'] ?? 'utensils',
+            'image' => asset('images/home/product-restaurant.jpg'),
+            'image_alt' => 'Restaurant POS tablet showing order management software',
+        ];
+    }
+
+    public static function platform(): array
+    {
+        return [
+            'eyebrow' => 'Product Approach',
+            'title' => 'Built as complete operational systems',
+            'body' => 'Each product is designed around a real industry workflow — not as a loose collection of features. We focus on the day-to-day work of the floor, desk, or clinic, then expand from a solid core.',
+            'points' => [
+                'Honest status — ready means ready, in development means in progress',
+                'Industry-specific workflows, not generic templates',
+                'Web-ready interfaces designed for real operating environments',
+                'Room to customize and extend as your business grows',
+            ],
+            'image' => asset('images/home/devices.jpg'),
+            'image_alt' => 'Laptop, tablet, and phone showing matching Softrix dashboards',
+        ];
+    }
+
+    public static function cta(): array
+    {
+        return [
+            'title' => "Have an idea or business challenge? Let's build something valuable.",
+            'button' => [
+                'label' => "Let's Talk",
+                'route' => 'contact',
+            ],
+        ];
+    }
+
     public static function seo(): array
     {
         return [
             'title' => 'Solutions & Products',
-            'description' => 'Explore the software product concepts Softrix International designs and customizes for businesses across industries.',
+            'description' => 'Explore Softrix International products — Restaurant Management System is ready today, with Hotel and Dental systems in development.',
             'keywords' => 'restaurant management system, hotel management system, dental management system, business management software, Softrix International',
-            'og_image' => null,
+            'og_image' => asset('images/home/product-restaurant.jpg'),
             'canonical' => route('solutions'),
         ];
     }

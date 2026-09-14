@@ -17,8 +17,8 @@ class CareersContent
             // Example shape for when real openings exist:
             // [
             //     'id' => 1,
-            //     'title' => 'Backend Engineer (Laravel)',
-            //     'slug' => 'backend-engineer-laravel',
+            //     'title' => 'Backend Engineer',
+            //     'slug' => 'backend-engineer',
             //     'department' => 'Engineering',
             //     'location' => 'Kathmandu, Nepal (Remote-friendly)',
             //     'employment_type' => 'Full-time',
@@ -41,16 +41,22 @@ class CareersContent
                 'title' => 'Meaningful Work',
                 'description' => 'Build software that solves real operational problems for real businesses.',
                 'icon' => 'target',
+                'image' => asset('images/careers/meaningful-work.jpg'),
+                'image_alt' => 'Person focused while working on a laptop',
             ],
             [
                 'title' => 'Room to Grow',
-                'description' => 'Work across the stack and take ownership as the company grows.',
+                'description' => 'Work across products and take ownership as the company grows.',
                 'icon' => 'trending-up',
+                'image' => asset('images/careers/room-to-grow.jpg'),
+                'image_alt' => 'Spiral staircase leading upward',
             ],
             [
                 'title' => 'Collaborative Culture',
                 'description' => 'A team that values craftsmanship, honesty, and continuous learning.',
                 'icon' => 'users',
+                'image' => asset('images/careers/collaborative-culture.jpg'),
+                'image_alt' => 'Coworkers smiling and collaborating around a laptop',
             ],
         ];
     }
@@ -64,7 +70,7 @@ class CareersContent
     {
         return [
             'title' => 'Careers',
-            'description' => 'Explore career opportunities at Softrix International and learn what it\u2019s like to work with our team.',
+            'description' => "Explore career opportunities at Softrix International and learn what it's like to work with our team.",
             'keywords' => 'Softrix International careers, jobs, hiring',
             'og_image' => null,
             'canonical' => route('careers'),

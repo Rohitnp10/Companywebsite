@@ -9,8 +9,14 @@ class ProjectsController extends Controller
 {
     public function index(): View
     {
+        $projects = ProjectsContent::ordered();
+
         return view('pages.projects', [
-            'projects' => ProjectsContent::ordered(),
+            'page' => ProjectsContent::page(),
+            'approach' => ProjectsContent::approach(),
+            'projects' => $projects,
+            'featured' => ProjectsContent::featured(),
+            'cta' => ProjectsContent::cta(),
             'seo' => ProjectsContent::seo(),
         ]);
     }

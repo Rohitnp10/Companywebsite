@@ -8,7 +8,7 @@ class ContactContent
     {
         return [
             'title' => "Let's Talk",
-            'description' => 'Have an idea, a business challenge, or a system that needs rebuilding? Tell us about it and we\u2019ll get back to you.',
+            'description' => "Have an idea, a business challenge, or a system that needs rebuilding? Tell us about it and we'll get back to you.",
         ];
     }
 

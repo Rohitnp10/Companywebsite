@@ -16,6 +16,7 @@ class AboutController extends Controller
             'values' => AboutContent::values(),
             'approach' => AboutContent::approach(),
             'techPhilosophy' => AboutContent::technologyPhilosophy(),
+            'cta' => AboutContent::cta(),
             'seo' => AboutContent::seo(),
         ]);
     }

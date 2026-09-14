@@ -14,11 +14,13 @@
     $keywords = $seo['keywords'] ?? config('seo.default_keywords');
     $ogImage = $seo['og_image'] ?? config('seo.default_og_image');
     $canonical = $seo['canonical'] ?? url()->current();
+    $robots = $seo['robots'] ?? 'index, follow';
 @endphp
 
 <title>{{ $fullTitle }}</title>
 <meta name="description" content="{{ $description }}">
 <meta name="keywords" content="{{ $keywords }}">
+<meta name="robots" content="{{ $robots }}">
 <link rel="canonical" href="{{ $canonical }}">
 
 <meta property="og:type" content="website">

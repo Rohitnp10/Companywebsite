@@ -9,11 +9,13 @@
     {{-- WHY JOIN US --}}
     <section class="bg-brand-bg">
         <div class="mx-auto max-w-7xl px-6 py-20 lg:px-8">
-            <x-sections.section-heading eyebrow="Why Softrix" title="Why Work With Us" align="center" />
+            <div data-reveal>
+                <x-sections.section-heading eyebrow="Why Softrix" title="Why Work With Us" align="center" />
+            </div>
 
-            <div class="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-3">
+            <div class="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3" data-reveal-stagger="80">
                 @foreach($whyJoinUs as $item)
-                    <x-cards.feature-card :title="$item['title']" :description="$item['description']" :icon="$item['icon']" />
+                    <x-cards.feature-card :title="$item['title']" :description="$item['description']" :icon="$item['icon']" :image="$item['image']" :image-alt="$item['image_alt']" />
                 @endforeach
             </div>
         </div>
@@ -22,9 +24,11 @@
     {{-- OPEN POSITIONS --}}
     <section class="border-t border-brand-border bg-brand-surface">
         <div class="mx-auto max-w-5xl px-6 py-20 lg:px-8">
-            <x-sections.section-heading eyebrow="Open Positions" title="Current Openings" align="center" />
+            <div data-reveal>
+                <x-sections.section-heading eyebrow="Open Positions" title="Current Openings" align="center" />
+            </div>
 
-            <div class="mt-12 space-y-4">
+            <div class="mt-12 space-y-4" data-reveal-stagger="70">
                 @forelse($jobs as $job)
                     <x-cards.job-card
                         :title="$job['title']"
@@ -34,7 +38,7 @@
                         :description="$job['description']"
                     />
                 @empty
-                    <div class="rounded-2xl border border-dashed border-brand-border bg-brand-card p-10 text-center">
+                    <div class="rounded-2xl border border-dashed border-brand-border bg-brand-card p-10 text-center" data-reveal>
                         <x-icons.icon name="briefcase" class="mx-auto h-8 w-8 text-brand-muted" />
                         <p class="text-body mt-4">{{ $noOpeningsMessage }}</p>
                         <div class="mt-6 flex justify-center">
