@@ -5,12 +5,11 @@ namespace App\Content;
 /**
  * Static "solutions / products" data source.
  *
- * NOTE: These are currently product CONCEPTS Softrix can build and
- * customize for clients — not established, shipped commercial products.
- * Copy is written accordingly (capability framing, not sales-figure or
- * customer-count claims). When real, named products exist, replace the
- * entries below (or the eventual `products` table rows) with accurate
- * details.
+ * Restaurant Management System is Softrix's flagship product and the only
+ * one currently ready; Hotel and Dental are in active development. Each
+ * entry carries a `status` (ready | in_development) driving the badge shown
+ * on the homepage product cards — keep copy honest to that status, no
+ * shipped-feature claims for anything still in development.
  */
 class SolutionsContent
 {
@@ -22,13 +21,14 @@ class SolutionsContent
                 'title' => 'Restaurant Management System',
                 'slug' => 'restaurant-management-system',
                 'category' => 'Hospitality',
-                'short_description' => 'A comprehensive solution concept for managing restaurant operations.',
-                'description' => 'Designed to bring order management, table tracking, inventory, staff scheduling, and sales reporting into a single system for restaurants and food-service businesses.',
+                'status' => 'ready',
+                'short_description' => 'Our flagship product — a complete system for managing restaurant operations end to end.',
+                'description' => 'Order management, table tracking, kitchen coordination, inventory, staff scheduling, billing, and sales reporting, all in a single system for restaurants and food-service businesses.',
                 'capabilities' => [
                     'Order & table management',
+                    'Kitchen display & ticket flow',
                     'Inventory & stock tracking',
-                    'Staff scheduling & roles',
-                    'Sales & performance reporting',
+                    'Billing, payments & reporting',
                 ],
                 'icon' => 'utensils',
                 'is_active' => true,
@@ -36,35 +36,37 @@ class SolutionsContent
             ],
             [
                 'id' => 2,
-                'title' => 'Retail Management System',
-                'slug' => 'retail-management-system',
-                'category' => 'Retail',
-                'short_description' => 'Tools for managing sales, inventory, products, and customers.',
-                'description' => 'A retail-focused system concept covering point-of-sale, inventory across locations, product catalogs, and customer records to help retailers run day-to-day operations more efficiently.',
+                'title' => 'Hotel Management System',
+                'slug' => 'hotel-management-system',
+                'category' => 'Hospitality',
+                'status' => 'in_development',
+                'short_description' => 'A complete system for managing hotel operations, currently in development.',
+                'description' => 'Being built to bring reservations, room and housekeeping status, guest billing, and front-desk operations into a single system for hotels and lodging businesses.',
                 'capabilities' => [
-                    'Point-of-sale & checkout flows',
-                    'Multi-location inventory tracking',
-                    'Product catalog management',
-                    'Customer records & purchase history',
+                    'Reservations & room status',
+                    'Guest check-in / check-out',
+                    'Housekeeping coordination',
+                    'Billing & invoicing',
                 ],
-                'icon' => 'shopping-bag',
+                'icon' => 'building-2',
                 'is_active' => true,
                 'sort_order' => 2,
             ],
             [
                 'id' => 3,
-                'title' => 'Business Management Platform',
-                'slug' => 'business-management-platform',
-                'category' => 'Cross-Industry',
-                'short_description' => 'Integrated tools designed to streamline general business operations.',
-                'description' => 'A configurable platform concept bringing together operations, staff, reporting, and workflow automation for businesses that have outgrown spreadsheets and disconnected tools.',
+                'title' => 'Dental Management System',
+                'slug' => 'dental-management-system',
+                'category' => 'Healthcare',
+                'status' => 'in_development',
+                'short_description' => 'A complete system for managing dental clinic operations, currently in development.',
+                'description' => 'Being built to bring appointment scheduling, patient records, treatment history, and billing into a single system for dental clinics.',
                 'capabilities' => [
-                    'Configurable operational workflows',
-                    'Centralized reporting & dashboards',
-                    'Role-based team access',
-                    'Extensible module architecture',
+                    'Appointment scheduling',
+                    'Patient records & history',
+                    'Treatment plan tracking',
+                    'Billing & invoicing',
                 ],
-                'icon' => 'layout-grid',
+                'icon' => 'heart-pulse',
                 'is_active' => true,
                 'sort_order' => 3,
             ],
@@ -95,7 +97,7 @@ class SolutionsContent
         return [
             'title' => 'Solutions & Products',
             'description' => 'Explore the software product concepts Softrix International designs and customizes for businesses across industries.',
-            'keywords' => 'business management software, restaurant management system, retail management system, Softrix International',
+            'keywords' => 'restaurant management system, hotel management system, dental management system, business management software, Softrix International',
             'og_image' => null,
             'canonical' => route('solutions'),
         ];

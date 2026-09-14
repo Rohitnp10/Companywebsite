@@ -47,11 +47,11 @@ return [
             ],
         ],
         [
-            'heading' => 'Solutions',
+            'heading' => 'Products',
             'links' => [
                 ['label' => 'Restaurant Management System', 'route' => 'solutions'],
-                ['label' => 'Retail Management System', 'route' => 'solutions'],
-                ['label' => 'Business Management Platform', 'route' => 'solutions'],
+                ['label' => 'Hotel Management System', 'route' => 'solutions'],
+                ['label' => 'Dental Management System', 'route' => 'solutions'],
             ],
         ],
     ],

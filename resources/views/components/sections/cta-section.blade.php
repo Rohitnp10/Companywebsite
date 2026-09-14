@@ -15,7 +15,7 @@
     <div class="relative mx-auto max-w-4xl px-6 py-20 text-center lg:px-8 animate-fadeIn">
         <h2 class="text-3xl font-extrabold text-white sm:text-4xl">{{ $title }}</h2>
         <div class="mt-8 flex justify-center">
-            <x-buttons.primary :route="$button['route']" class="!bg-white !text-brand-primary hover:!bg-brand-surface">
+            <x-buttons.primary :route="$button['route']" class="!bg-white !text-brand-primary hover:!bg-slate-100">
                 {{ $button['label'] }}
             </x-buttons.primary>
         </div>

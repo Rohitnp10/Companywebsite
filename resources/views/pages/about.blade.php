@@ -7,7 +7,7 @@
     />
 
     {{-- MISSION & VISION --}}
-    <section class="bg-white">
+    <section class="bg-brand-bg">
         <div class="mx-auto max-w-7xl px-6 py-20 lg:px-8">
             <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
                 <div class="rounded-2xl border border-brand-border bg-brand-surface p-8">
@@ -18,8 +18,8 @@
                     <p class="h-subsection mt-4 !text-xl">{{ $mission['body'] }}</p>
                 </div>
                 <div class="rounded-2xl border border-brand-border bg-brand-primary p-8 text-white">
-                    <span class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-brand-accent-light">
-                        <span class="h-1.5 w-1.5 rounded-full bg-brand-accent-light"></span>
+                    <span class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-brand-accent">
+                        <span class="h-1.5 w-1.5 rounded-full bg-brand-accent"></span>
                         {{ $vision['title'] }}
                     </span>
                     <p class="mt-4 text-xl font-semibold leading-snug">{{ $vision['body'] }}</p>
@@ -42,7 +42,7 @@
     </section>
 
     {{-- APPROACH --}}
-    <section class="bg-white">
+    <section class="bg-brand-bg">
         <div class="mx-auto max-w-7xl px-6 py-20 lg:px-8">
             <x-sections.section-heading eyebrow="How We Work" :title="$approach['title']" align="center" />
 

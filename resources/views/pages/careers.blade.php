@@ -7,7 +7,7 @@
     />
 
     {{-- WHY JOIN US --}}
-    <section class="bg-white">
+    <section class="bg-brand-bg">
         <div class="mx-auto max-w-7xl px-6 py-20 lg:px-8">
             <x-sections.section-heading eyebrow="Why Softrix" title="Why Work With Us" align="center" />
 
@@ -34,7 +34,7 @@
                         :description="$job['description']"
                     />
                 @empty
-                    <div class="rounded-2xl border border-dashed border-brand-border bg-white p-10 text-center">
+                    <div class="rounded-2xl border border-dashed border-brand-border bg-brand-card p-10 text-center">
                         <x-icons.icon name="briefcase" class="mx-auto h-8 w-8 text-brand-muted" />
                         <p class="text-body mt-4">{{ $noOpeningsMessage }}</p>
                         <div class="mt-6 flex justify-center">

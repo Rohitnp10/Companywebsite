@@ -1,6 +1,6 @@
 @props(['title', 'department', 'location', 'employment_type', 'description'])
 
-<div {{ $attributes->merge(['class' => 'flex flex-col justify-between gap-4 rounded-2xl border border-brand-border bg-white p-6 sm:flex-row sm:items-center']) }}>
+<div {{ $attributes->merge(['class' => 'flex flex-col justify-between gap-4 rounded-2xl border border-brand-border bg-brand-card p-6 transition-colors duration-200 hover:bg-brand-card-hover sm:flex-row sm:items-center']) }}>
     <div>
         <h3 class="h-subsection">{{ $title }}</h3>
         <p class="text-small mt-1">{{ $description }}</p>

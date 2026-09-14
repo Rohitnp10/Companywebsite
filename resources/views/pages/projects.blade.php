@@ -6,7 +6,7 @@
         description="A look at the concept builds we use to demonstrate our engineering and design approach."
     />
 
-    <section class="bg-white">
+    <section class="bg-brand-bg">
         <div class="mx-auto max-w-7xl px-6 py-20 lg:px-8">
             <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
                 @foreach($projects as $project)

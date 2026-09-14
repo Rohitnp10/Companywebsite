@@ -6,7 +6,7 @@
         description="From first line of code to long-term support, here's how we help businesses build and maintain the software they run on."
     />
 
-    <section class="bg-white">
+    <section class="bg-brand-bg">
         <div class="mx-auto max-w-7xl px-6 py-20 lg:px-8">
             <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 @foreach($services as $service)

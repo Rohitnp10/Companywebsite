@@ -1,7 +1,7 @@
 @props(['title', 'category' => null, 'description', 'technologies' => [], 'image' => null])
 
-<div {{ $attributes->merge(['class' => 'overflow-hidden rounded-2xl border border-brand-border bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-soft-lg']) }}>
-    <div class="flex h-44 items-center justify-center bg-gradient-to-br from-brand-primary to-brand-accent/80">
+<div {{ $attributes->merge(['class' => 'overflow-hidden rounded-2xl border border-brand-border bg-brand-card transition-all duration-300 hover:-translate-y-1 hover:bg-brand-card-hover hover:shadow-soft-lg']) }}>
+    <div class="flex h-44 items-center justify-center bg-brand-primary">
         @if($image)
             <img src="{{ asset($image) }}" alt="{{ $title }}" class="h-full w-full object-cover">
         @else
