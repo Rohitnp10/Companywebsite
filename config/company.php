@@ -88,9 +88,10 @@ return [
     | Brand Assets
     |--------------------------------------------------------------------------
     */
-    'logo' => '/images/logo.svg',
-    'logo_mark' => '/images/logo-mark.svg',
-    'favicon' => '/favicon.ico',
+    'logo' => '/assets/logo/softrix-logo-horizontal-transparent-darktext.png',
+    'logo_on_dark' => '/assets/logo/softrix-logo-horizontal-on-dark.png',
+    'logo_mark' => '/assets/svg/softrix-monogram.svg',
+    'favicon' => '/assets/favicon/favicon.ico',
 
     'website' => 'https://www.softrixinternational.com',
 ];

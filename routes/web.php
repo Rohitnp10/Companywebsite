@@ -8,6 +8,7 @@ use App\Http\Controllers\IndustriesController;
 use App\Http\Controllers\ProjectsController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\SolutionsController;
+use App\Http\Controllers\TeamController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,6 +30,7 @@ Route::get('/solutions', [SolutionsController::class, 'index'])->name('solutions
 Route::get('/industries', [IndustriesController::class, 'index'])->name('industries');
 Route::get('/projects', [ProjectsController::class, 'index'])->name('projects');
 Route::get('/careers', [CareersController::class, 'index'])->name('careers');
+Route::get('/team', [TeamController::class, 'index'])->name('team');
 
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');

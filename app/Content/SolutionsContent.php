@@ -22,7 +22,7 @@ class SolutionsContent
                 'slug' => 'restaurant-management-system',
                 'category' => 'Hospitality',
                 'status' => 'ready',
-                'short_description' => 'Our flagship product — a complete system for managing restaurant operations end to end.',
+                'short_description' => 'An integrated platform for modern restaurants to manage sales, inventory, orders, tables, reports, and daily operations.',
                 'description' => 'Order management, table tracking, kitchen coordination, inventory, staff scheduling, billing, and sales reporting, all in a single system for restaurants and food-service businesses.',
                 'capabilities' => [
                     'Order & table management',
@@ -166,7 +166,7 @@ class SolutionsContent
             'title' => 'Solutions & Products',
             'description' => 'Explore Softrix International products — Restaurant Management System is ready today, with Hotel and Dental systems in development.',
             'keywords' => 'restaurant management system, hotel management system, dental management system, business management software, Softrix International',
-            'og_image' => asset('images/home/product-restaurant.jpg'),
+            'og_image' => asset('assets/social/og-image-1200x630.png'),
             'canonical' => route('solutions'),
         ];
     }

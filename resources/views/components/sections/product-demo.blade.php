@@ -20,7 +20,7 @@
     {{ $attributes->merge(['class' => 'group relative w-full']) }}
 >
     {{-- Browser chrome --}}
-    <div class="overflow-hidden rounded-2xl border border-brand-border bg-brand-card shadow-soft-lg">
+    <div class="overflow-hidden rounded-[var(--radius-lg)] border border-brand-border bg-brand-card shadow-soft-lg">
         <div class="flex items-center gap-3 border-b border-brand-border bg-brand-surface px-4 py-3">
             <div class="flex gap-1.5">
                 <span class="h-2.5 w-2.5 rounded-full bg-red-400/70"></span>

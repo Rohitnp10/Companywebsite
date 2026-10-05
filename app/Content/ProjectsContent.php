@@ -125,7 +125,7 @@ class ProjectsContent
             'title' => 'Projects',
             'description' => 'A look at the concept builds and internal projects Softrix International has developed to demonstrate its engineering approach.',
             'keywords' => 'Softrix International projects, portfolio, concept builds',
-            'og_image' => asset('images/home/product-restaurant.jpg'),
+            'og_image' => asset('assets/social/og-image-1200x630.png'),
             'canonical' => route('projects'),
         ];
     }

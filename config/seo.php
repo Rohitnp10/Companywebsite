@@ -15,6 +15,6 @@ return [
     'title_separator' => ' | ',
     'default_description' => 'Softrix International builds modern software, digital products, and technology solutions that help businesses operate smarter, scale faster, and create better experiences.',
     'default_keywords' => 'Softrix International, custom software development, web application development, mobile app development, UI/UX design, business management systems, cloud solutions',
-    'default_og_image' => '/images/og/softrix-default.jpg',
+    'default_og_image' => '/assets/social/og-image-1200x630.png',
     'twitter_handle' => '@softrixintl',
 ];

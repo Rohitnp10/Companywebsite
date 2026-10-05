@@ -1,12 +1,9 @@
 import defaultTheme from 'tailwindcss/defaultTheme';
 
 /**
- * Centralized design tokens.
- *
- * Colors and typography live here so the brand can be restyled from a
- * single location. If these values are ever driven by a database "theme"
- * setting, this file becomes the compile-time fallback while runtime
- * values can be layered on via CSS custom properties.
+ * Softrix design tokens sampled from the logo:
+ * violet symbol, gold accent, near-black field, white wordmark.
+ * Type: Manrope.
  */
 export default {
     darkMode: 'class',
@@ -20,18 +17,15 @@ export default {
         extend: {
             fontFamily: {
                 sans: ['Inter', ...defaultTheme.fontFamily.sans],
+                display: ['Inter', ...defaultTheme.fontFamily.sans],
+                mono: ['Inter', ...defaultTheme.fontFamily.mono],
             },
             colors: {
                 brand: {
-                    // Static brand ink — always near-black, regardless of theme.
-                    // Used for backgrounds/text meant to stay fixed (footer, CTA
-                    // band, logo mark, and as the dark text sitting on accent-
-                    // colored buttons) — never for regular body text.
-                    primary: '#121212',
+                    primary: '#0B0F14',
+                    gold: 'rgb(var(--color-gold) / <alpha-value>)',
+                    violet: 'rgb(var(--color-violet) / <alpha-value>)',
                     DEFAULT: 'rgb(var(--color-accent) / <alpha-value>)',
-
-                    // Theme-aware tokens — these read CSS custom properties that flip
-                    // when the `dark` class is present on <html>. See resources/css/app.css.
                     bg: 'rgb(var(--color-bg) / <alpha-value>)',
                     surface: 'rgb(var(--color-surface) / <alpha-value>)',
                     card: 'rgb(var(--color-card) / <alpha-value>)',
@@ -40,26 +34,25 @@ export default {
                     text: 'rgb(var(--color-text) / <alpha-value>)',
                     muted: 'rgb(var(--color-muted) / <alpha-value>)',
                     border: 'rgb(var(--color-border) / <alpha-value>)',
-
-                    // Royal Blue brand accent (#305CDE) — same hex in both
-                    // themes; still a CSS var (not a fixed hex like `primary`
-                    // above) because hover/active shades flip direction
-                    // between light and dark surfaces.
                     accent: 'rgb(var(--color-accent) / <alpha-value>)',
                     'accent-hover': 'rgb(var(--color-accent-hover) / <alpha-value>)',
                     'accent-dark': 'rgb(var(--color-accent-dark) / <alpha-value>)',
-
                     success: 'rgb(var(--color-success) / <alpha-value>)',
                     danger: 'rgb(var(--color-danger) / <alpha-value>)',
                     warning: 'rgb(var(--color-warning) / <alpha-value>)',
                 },
             },
+            maxWidth: {
+                site: '74rem',
+            },
+            spacing: {
+                section: 'clamp(4.5rem, 8vw, 7.5rem)',
+                gutter: 'clamp(1.25rem, 4vw, 2rem)',
+            },
             boxShadow: {
-                soft: '0 1px 2px 0 rgb(15 23 42 / 0.04), 0 4px 12px -2px rgb(15 23 42 / 0.06)',
-                'soft-lg': '0 8px 24px -4px rgb(15 23 42 / 0.10), 0 2px 8px -2px rgb(15 23 42 / 0.06)',
-                // Subtle Royal Blue glow for primary-button hover / selected states —
-                // deliberately soft, never a neon/gaming-style glow.
-                glow: '0 8px 20px -6px rgb(var(--color-accent) / 0.35), 0 0 0 1px rgb(var(--color-accent) / 0.18)',
+                soft: '0 1px 0 rgb(11 18 32 / 0.04)',
+                'soft-lg': '0 12px 40px -20px rgb(11 18 32 / 0.18)',
+                glow: '0 10px 28px -12px rgb(var(--color-accent) / 0.45)',
             },
             keyframes: {
                 fadeIn: {
@@ -67,13 +60,13 @@ export default {
                     '100%': { opacity: '1' },
                 },
                 slideUp: {
-                    '0%': { opacity: '0', transform: 'translateY(16px)' },
+                    '0%': { opacity: '0', transform: 'translateY(12px)' },
                     '100%': { opacity: '1', transform: 'translateY(0)' },
                 },
             },
             animation: {
-                fadeIn: 'fadeIn 0.6s ease-out both',
-                slideUp: 'slideUp 0.6s ease-out both',
+                fadeIn: 'fadeIn 0.5s ease-out both',
+                slideUp: 'slideUp 0.55s ease-out both',
             },
         },
     },

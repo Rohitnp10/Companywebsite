@@ -9,34 +9,31 @@
     'featured' => false,
 ])
 
-<article {{ $attributes->merge(['class' => 'group flex h-full flex-col overflow-hidden rounded-2xl border bg-brand-card transition-all duration-300 hover:-translate-y-1 hover:shadow-soft-lg ' . ($featured ? 'border-brand-accent/35 ring-1 ring-brand-accent/10' : 'border-brand-border hover:border-brand-accent/30')]) }}>
-    <div class="relative flex h-48 items-center justify-center overflow-hidden bg-brand-primary">
+<article {{ $attributes->merge(['class' => 'group flex h-full flex-col']) }}>
+    <div class="relative media-frame aspect-[16/10] border border-brand-border bg-brand-primary">
         @if($image)
             <img
                 src="{{ str_starts_with($image, 'http') ? $image : asset($image) }}"
                 alt="{{ $title }}"
                 loading="lazy"
-                class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.02]"
             />
-            <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand-primary/50 via-transparent to-transparent"></div>
         @else
-            <div class="absolute inset-0 bg-gradient-to-br from-brand-accent/20 via-brand-primary to-brand-primary"></div>
-            <div class="relative flex h-16 w-16 items-center justify-center rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm">
-                <x-icons.icon :name="$icon" class="h-7 w-7 text-brand-accent" />
+            <div class="flex h-full items-center justify-center">
+                <x-icons.icon :name="$icon" class="h-8 w-8 text-brand-accent" />
             </div>
-        @endif
-
-        @if($subtitle)
-            <span class="absolute left-4 top-4 rounded-full border border-white/15 bg-brand-primary/70 px-2.5 py-1 text-[11px] font-semibold text-white backdrop-blur-sm">
-                {{ $subtitle }}
-            </span>
         @endif
     </div>
 
-    <div class="flex flex-1 flex-col p-6">
-        @if($category)
-            <span class="text-xs font-semibold uppercase tracking-widest text-brand-accent">{{ $category }}</span>
-        @endif
+    <div class="flex flex-1 flex-col pt-5">
+        <div class="flex flex-wrap items-center gap-2">
+            @if($category)
+                <span class="font-mono text-[0.625rem] uppercase tracking-[0.14em] text-brand-accent">{{ $category }}</span>
+            @endif
+            @if($subtitle)
+                <span class="font-mono text-[0.625rem] uppercase tracking-[0.12em] text-brand-muted">{{ $subtitle }}</span>
+            @endif
+        </div>
         <h3 class="h-subsection mt-2">{{ $title }}</h3>
         <p class="text-small mt-2 flex-1">{{ $description }}</p>
 

@@ -1,14 +1,14 @@
 @props(['title', 'department', 'location', 'employment_type', 'description'])
 
-<div {{ $attributes->merge(['class' => 'flex flex-col justify-between gap-4 rounded-2xl border border-brand-border bg-brand-card p-6 transition-colors duration-200 hover:bg-brand-card-hover sm:flex-row sm:items-center']) }}>
-    <div>
+<article {{ $attributes->merge(['class' => 'flex flex-col justify-between gap-5 border-b border-brand-border py-6 sm:flex-row sm:items-center']) }}>
+    <div class="min-w-0">
         <h3 class="h-subsection">{{ $title }}</h3>
         <p class="text-small mt-1">{{ $description }}</p>
-        <div class="mt-3 flex flex-wrap gap-2 text-xs font-medium text-brand-muted">
-            <span class="rounded-full bg-brand-surface px-3 py-1">{{ $department }}</span>
-            <span class="rounded-full bg-brand-surface px-3 py-1">{{ $location }}</span>
-            <span class="rounded-full bg-brand-surface px-3 py-1">{{ $employment_type }}</span>
+        <div class="mt-3 flex flex-wrap gap-x-4 gap-y-1 font-mono text-[0.6875rem] uppercase tracking-[0.1em] text-brand-muted">
+            <span>{{ $department }}</span>
+            <span>{{ $location }}</span>
+            <span>{{ $employment_type }}</span>
         </div>
     </div>
     <x-buttons.secondary route="contact" class="shrink-0">Apply Now</x-buttons.secondary>
-</div>
+</article>

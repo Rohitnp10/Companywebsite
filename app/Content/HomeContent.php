@@ -7,18 +7,18 @@ class HomeContent
     public static function hero(): array
     {
         return [
-            'eyebrow' => 'Technology Partner',
+            'eyebrow' => 'Software, innovation, and digital products',
             'brand' => config('company.short_name'),
-            'title' => 'Building Digital Solutions That Move Businesses Forward.',
-            'description' => 'Softrix International builds modern software, digital products, and technology solutions designed to help businesses operate smarter, scale faster, and create better experiences.',
+            'title' => 'Building Digital Products That Move Businesses Forward.',
+            'description' => 'Modern software solutions designed to simplify operations, improve experiences, and help businesses scale.',
             'image' => asset('images/home/hero-tech.jpg'),
             'image_alt' => 'Dual monitors showing Softrix business analytics dashboards',
             'primary_button' => [
-                'label' => 'Explore Our Solutions',
+                'label' => 'Explore Our Products',
                 'route' => 'solutions',
             ],
             'secondary_button' => [
-                'label' => "Let's Talk",
+                'label' => 'Talk to Us',
                 'route' => 'contact',
             ],
         ];
@@ -136,10 +136,32 @@ class HomeContent
     public static function cta(): array
     {
         return [
-            'title' => "Have an idea or business challenge? Let's build something valuable.",
+            'title' => "Let's Build Something That Matters.",
+            'description' => 'Have a business challenge or product idea? Let’s turn it into a practical digital solution.',
             'button' => [
-                'label' => "Let's Talk",
+                'label' => 'Start a Conversation',
                 'route' => 'contact',
+            ],
+            'secondary' => [
+                'label' => 'Explore Products',
+                'route' => 'solutions',
+            ],
+        ];
+    }
+
+    public static function process(): array
+    {
+        return [
+            'eyebrow' => 'How We Work',
+            'title' => 'From the first conversation to what ships next',
+            'steps' => [
+                ['title' => 'Discover', 'description' => 'Learn how the business actually operates.'],
+                ['title' => 'Define', 'description' => 'Set scope, priorities, and success clearly.'],
+                ['title' => 'Design', 'description' => 'Shape flows and interfaces people can use.'],
+                ['title' => 'Develop', 'description' => 'Build with maintainable engineering choices.'],
+                ['title' => 'Test', 'description' => 'Check the product against real workflows.'],
+                ['title' => 'Launch', 'description' => 'Release with a plan for the first weeks.'],
+                ['title' => 'Improve', 'description' => 'Stay with the product after it is live.'],
             ],
         ];
     }
@@ -150,7 +172,7 @@ class HomeContent
             'title' => null, // null => falls back to seo.default_title
             'description' => 'Softrix International builds modern software, digital products, and technology solutions that help businesses operate smarter, scale faster, and grow with confidence.',
             'keywords' => config('seo.default_keywords'),
-            'og_image' => asset('images/home/hero-tech.jpg'),
+            'og_image' => asset('assets/social/og-image-1200x630.png'),
             'canonical' => route('home'),
         ];
     }

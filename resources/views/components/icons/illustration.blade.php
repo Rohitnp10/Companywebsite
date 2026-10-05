@@ -16,20 +16,10 @@
 
 <div
     @if($animated) data-icon-live @endif
-    {{ $attributes->merge(['class' => "group/illustration relative inline-flex shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-brand-accent/15 bg-gradient-to-br from-brand-accent/15 via-brand-accent/5 to-transparent transition-transform duration-300 {$s['box']}"]) }}
+    {{ $attributes->merge(['class' => "group/illustration relative inline-flex shrink-0 items-center justify-center overflow-hidden rounded-[var(--radius-md)] border border-brand-border bg-brand-card transition-colors duration-300 {$s['box']}"]) }}
 >
-    {{-- soft glow, drifts slightly on hover for a touch of depth --}}
-    <span class="{{ $s['glow'] }} absolute -right-2 -top-2 rounded-full bg-brand-accent/25 blur-md transition-transform duration-500 group-hover/illustration:translate-x-0.5 group-hover/illustration:translate-y-0.5 icon-glow-pulse"></span>
-
-    {{-- orbiting accent ring --}}
-    <span class="pointer-events-none absolute inset-1 rounded-xl border border-brand-accent/0 transition-colors duration-300 group-hover/illustration:border-brand-accent/25" aria-hidden="true"></span>
-
-    {{-- glyph --}}
     <x-icons.icon
         :name="$name"
-        class="{{ $s['glyph'] }} relative text-brand-accent transition-transform duration-300 group-hover/illustration:scale-110 {{ $animated ? 'icon-draw' : '' }}"
+        class="{{ $s['glyph'] }} relative text-brand-accent {{ $animated ? 'icon-draw' : '' }}"
     />
-
-    {{-- accent flourish --}}
-    <span class="{{ $s['dot'] }} absolute bottom-1.5 right-1.5 rounded-full bg-brand-accent/70 transition-transform duration-300 group-hover/illustration:scale-125"></span>
 </div>

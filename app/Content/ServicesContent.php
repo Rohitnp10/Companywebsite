@@ -268,7 +268,7 @@ class ServicesContent
             'title' => 'Our Services',
             'description' => 'Explore the software development, design, and technology services Softrix International offers to help businesses build and scale.',
             'keywords' => 'software development services, web development, mobile app development, UI/UX design, Softrix International',
-            'og_image' => asset('images/home/devices.jpg'),
+            'og_image' => asset('assets/social/og-image-1200x630.png'),
             'canonical' => route('services'),
         ];
     }

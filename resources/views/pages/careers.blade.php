@@ -6,29 +6,33 @@
         description="We're building a team that cares about craftsmanship, honesty, and solving real problems with technology."
     />
 
-    {{-- WHY JOIN US --}}
     <section class="bg-brand-bg">
-        <div class="mx-auto max-w-7xl px-6 py-20 lg:px-8">
-            <div data-reveal>
-                <x-sections.section-heading eyebrow="Why Softrix" title="Why Work With Us" align="center" />
+        <div class="site-container section-pad">
+            <div data-reveal class="max-w-2xl">
+                <x-sections.section-heading eyebrow="Why Softrix" title="Why work with us" />
             </div>
 
-            <div class="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3" data-reveal-stagger="80">
+            <div class="mt-14 grid grid-cols-1 gap-x-10 gap-y-2 sm:grid-cols-3" data-reveal-stagger="70">
                 @foreach($whyJoinUs as $item)
-                    <x-cards.feature-card :title="$item['title']" :description="$item['description']" :icon="$item['icon']" :image="$item['image']" :image-alt="$item['image_alt']" />
+                    <x-cards.feature-card
+                        :title="$item['title']"
+                        :description="$item['description']"
+                        :icon="$item['icon']"
+                        :image="$item['image']"
+                        :image-alt="$item['image_alt']"
+                    />
                 @endforeach
             </div>
         </div>
     </section>
 
-    {{-- OPEN POSITIONS --}}
     <section class="border-t border-brand-border bg-brand-surface">
-        <div class="mx-auto max-w-5xl px-6 py-20 lg:px-8">
-            <div data-reveal>
-                <x-sections.section-heading eyebrow="Open Positions" title="Current Openings" align="center" />
+        <div class="site-container section-pad">
+            <div data-reveal class="max-w-2xl">
+                <x-sections.section-heading eyebrow="Open Positions" title="Current openings" />
             </div>
 
-            <div class="mt-12 space-y-4" data-reveal-stagger="70">
+            <div class="mt-10" data-reveal>
                 @forelse($jobs as $job)
                     <x-cards.job-card
                         :title="$job['title']"
@@ -38,11 +42,12 @@
                         :description="$job['description']"
                     />
                 @empty
-                    <div class="rounded-2xl border border-dashed border-brand-border bg-brand-card p-10 text-center" data-reveal>
-                        <x-icons.icon name="briefcase" class="mx-auto h-8 w-8 text-brand-muted" />
-                        <p class="text-body mt-4">{{ $noOpeningsMessage }}</p>
-                        <div class="mt-6 flex justify-center">
-                            <x-buttons.secondary route="contact">Get In Touch</x-buttons.secondary>
+                    <div class="border border-dashed border-brand-border bg-brand-bg px-6 py-12 text-center sm:px-10">
+                        <p class="font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-brand-accent">No openings</p>
+                        <p class="text-body mx-auto mt-4 max-w-lg">{{ $noOpeningsMessage }}</p>
+                        <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+                            <x-buttons.primary route="contact">Get In Touch</x-buttons.primary>
+                            <x-buttons.secondary route="team">Meet the Team</x-buttons.secondary>
                         </div>
                     </div>
                 @endforelse

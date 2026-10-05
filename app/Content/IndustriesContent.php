@@ -204,7 +204,7 @@ class IndustriesContent
             'title' => 'Industries We Work With',
             'description' => 'See the industries Softrix International builds software solutions for, from hospitality and retail to healthcare and enterprise.',
             'keywords' => 'industries, hospitality software, retail software, healthcare software, enterprise software, Softrix International',
-            'og_image' => asset('images/home/about-collab.jpg'),
+            'og_image' => asset('assets/social/og-image-1200x630.png'),
             'canonical' => route('industries'),
         ];
     }

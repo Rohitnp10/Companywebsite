@@ -22,6 +22,7 @@ class HomeController extends Controller
             'devices' => HomeContent::devices(),
             'industries' => IndustriesContent::active(),
             'whySoftrix' => HomeContent::whySoftrix(),
+            'process' => HomeContent::process(),
             'cta' => HomeContent::cta(),
             'seo' => HomeContent::seo(),
         ]);

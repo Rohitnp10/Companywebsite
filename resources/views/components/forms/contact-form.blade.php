@@ -1,18 +1,11 @@
 @props(['subjects' => []])
 
-{{--
-    Static-phase contact form.
-
-    Posts to route('contact.store') with CSRF, named fields, and error helpers.
-    When real handling is added (DB + email), this markup requires no changes.
---}}
-
 @if(session('status') === 'demo-submitted')
-    <div class="mb-6 flex items-start gap-3 rounded-xl border border-brand-accent/30 bg-brand-accent/5 p-4 text-sm text-brand-heading">
+    <div class="mb-6 flex items-start gap-3 border border-brand-accent/25 bg-brand-accent/5 p-4 text-sm text-brand-heading">
         <x-icons.icon name="check" class="mt-0.5 h-5 w-5 shrink-0 text-brand-accent" />
         <div>
             <p class="font-semibold">Thanks for reaching out.</p>
-            <p class="mt-1 text-brand-muted">This is currently a demo submission — the website is in its static phase and form handling isn't wired up to email or a database yet. We've noted the layout is ready for that once it is.</p>
+            <p class="mt-1 text-brand-muted">This is currently a demo submission — the website is in its static phase and form handling isn't wired up to email or a database yet.</p>
         </div>
     </div>
 @endif
@@ -22,39 +15,34 @@
 
     <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <div>
-            <label for="name" class="text-sm font-medium text-brand-heading">Name</label>
-            <input type="text" name="name" id="name" value="{{ old('name') }}" required
-                   class="mt-1.5 w-full rounded-lg border border-brand-border bg-brand-card px-4 py-3 text-sm text-brand-text focus:border-brand-accent focus:outline-none focus:ring-1 focus:ring-brand-accent">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" name="name" id="name" value="{{ old('name') }}" required class="form-field">
             @error('name') <p class="mt-1 text-xs text-brand-danger">{{ $message }}</p> @enderror
         </div>
 
         <div>
-            <label for="email" class="text-sm font-medium text-brand-heading">Email</label>
-            <input type="email" name="email" id="email" value="{{ old('email') }}" required
-                   class="mt-1.5 w-full rounded-lg border border-brand-border bg-brand-card px-4 py-3 text-sm text-brand-text focus:border-brand-accent focus:outline-none focus:ring-1 focus:ring-brand-accent">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" name="email" id="email" value="{{ old('email') }}" required class="form-field">
             @error('email') <p class="mt-1 text-xs text-brand-danger">{{ $message }}</p> @enderror
         </div>
 
         <div>
-            <label for="phone" class="text-sm font-medium text-brand-heading">Phone <span class="text-brand-muted font-normal">(optional)</span></label>
-            <input type="text" name="phone" id="phone" value="{{ old('phone') }}"
-                   class="mt-1.5 w-full rounded-lg border border-brand-border bg-brand-card px-4 py-3 text-sm text-brand-text focus:border-brand-accent focus:outline-none focus:ring-1 focus:ring-brand-accent">
+            <label for="phone" class="form-label">Phone <span class="font-normal text-brand-muted">(optional)</span></label>
+            <input type="text" name="phone" id="phone" value="{{ old('phone') }}" class="form-field">
             @error('phone') <p class="mt-1 text-xs text-brand-danger">{{ $message }}</p> @enderror
         </div>
 
         <div>
-            <label for="company" class="text-sm font-medium text-brand-heading">Company <span class="text-brand-muted font-normal">(optional)</span></label>
-            <input type="text" name="company" id="company" value="{{ old('company') }}"
-                   class="mt-1.5 w-full rounded-lg border border-brand-border bg-brand-card px-4 py-3 text-sm text-brand-text focus:border-brand-accent focus:outline-none focus:ring-1 focus:ring-brand-accent">
+            <label for="company" class="form-label">Company <span class="font-normal text-brand-muted">(optional)</span></label>
+            <input type="text" name="company" id="company" value="{{ old('company') }}" class="form-field">
             @error('company') <p class="mt-1 text-xs text-brand-danger">{{ $message }}</p> @enderror
         </div>
     </div>
 
     <div>
-        <label for="subject" class="text-sm font-medium text-brand-heading">Subject</label>
-        <select name="subject" id="subject" required
-                class="mt-1.5 w-full rounded-lg border border-brand-border bg-brand-card px-4 py-3 text-sm text-brand-text focus:border-brand-accent focus:outline-none focus:ring-1 focus:ring-brand-accent">
-            <option value="" disabled selected>Select a subject</option>
+        <label for="subject" class="form-label">Subject</label>
+        <select name="subject" id="subject" required class="form-field">
+            <option value="" disabled @selected(old('subject') === null)>Select a subject</option>
             @foreach($subjects as $subject)
                 <option value="{{ $subject }}" @selected(old('subject') === $subject)>{{ $subject }}</option>
             @endforeach
@@ -63,9 +51,8 @@
     </div>
 
     <div>
-        <label for="message" class="text-sm font-medium text-brand-heading">Message</label>
-        <textarea name="message" id="message" rows="5" required
-                  class="mt-1.5 w-full rounded-lg border border-brand-border bg-brand-card px-4 py-3 text-sm text-brand-text focus:border-brand-accent focus:outline-none focus:ring-1 focus:ring-brand-accent">{{ old('message') }}</textarea>
+        <label for="message" class="form-label">Message</label>
+        <textarea name="message" id="message" rows="5" required class="form-field">{{ old('message') }}</textarea>
         @error('message') <p class="mt-1 text-xs text-brand-danger">{{ $message }}</p> @enderror
     </div>
 

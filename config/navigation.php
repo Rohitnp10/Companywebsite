@@ -12,16 +12,15 @@
 return [
 
     'primary' => [
+        ['label' => 'Home', 'route' => 'home'],
+        ['label' => 'Products', 'route' => 'solutions'],
+        ['label' => 'Solutions', 'route' => 'services'],
         ['label' => 'About', 'route' => 'about'],
-        ['label' => 'Services', 'route' => 'services'],
-        ['label' => 'Solutions', 'route' => 'solutions'],
-        ['label' => 'Industries', 'route' => 'industries'],
-        ['label' => 'Projects', 'route' => 'projects'],
-        ['label' => 'Careers', 'route' => 'careers'],
+        ['label' => 'Contact', 'route' => 'contact'],
     ],
 
     'cta' => [
-        'label' => "Let's Talk",
+        'label' => "Let's Build Together",
         'route' => 'contact',
     ],
 
@@ -30,6 +29,7 @@ return [
             'heading' => 'Company',
             'links' => [
                 ['label' => 'About Us', 'route' => 'about'],
+                ['label' => 'Team', 'route' => 'team'],
                 ['label' => 'Careers', 'route' => 'careers'],
                 ['label' => 'Projects', 'route' => 'projects'],
                 ['label' => 'Contact', 'route' => 'contact'],

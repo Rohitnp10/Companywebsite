@@ -3,72 +3,58 @@
 @tailwind utilities;
 
 @layer base {
-    /*
-     * Theme tokens as CSS custom properties (R G B triplets, no commas) so
-     * Tailwind's `rgb(var(--x) / <alpha-value>)` colors support opacity
-     * modifiers like `bg-brand-card/90`. Overridden under `.dark` below —
-     * toggling that class on <html> is all it takes to switch themes.
-     */
     :root {
-        --color-bg: 255 255 255;
-        --color-surface: 248 249 252;
-        --color-card: 245 247 251;
-        --color-card-hover: 238 242 250;
-        --color-heading: 18 18 18;
-        --color-text: 95 99 104;
-        --color-muted: 133 139 149;
-        --color-border: 226 230 239;
+        --brand-purple: 90 39 214;
+        --brand-violet: 138 85 247;
+        --brand-gold: 239 166 72;
+        --brand-dark: 11 15 20;
 
-        /* Royal Blue brand accent — #305CDE, identical in both themes.
-           Hover darkens on light surfaces; a deeper shade covers active/
-           pressed states. Translucent tints use the accent with an
-           opacity modifier (e.g. bg-brand-accent/10) rather than a
-           separate token. */
-        --color-accent: 48 92 222;
-        --color-accent-hover: 36 73 184;
-        --color-accent-dark: 29 63 165;
+        --color-bg: 255 255 255;
+        --color-surface: 246 247 249;
+        --color-card: 255 255 255;
+        --color-card-hover: 241 243 246;
+        --color-heading: 11 15 20;
+        --color-text: 51 61 76;
+        --color-muted: 100 112 128;
+        --color-border: 226 230 236;
+
+        --color-accent: var(--brand-purple);
+        --color-accent-hover: 122 69 240;
+        --color-accent-dark: 74 28 184;
+        --color-violet: var(--brand-violet);
+        --color-gold: var(--brand-gold);
 
         --color-success: 22 163 74;
         --color-danger: 220 38 38;
         --color-warning: 217 119 6;
 
-        /* Glassmorphism — light translucent surface. See .glass / .glass-strong
-           / .glass-accent in @layer components. */
-        --glass-bg: rgba(255, 255, 255, 0.70);
-        --glass-bg-strong: rgba(255, 255, 255, 0.88);
-        --glass-border: rgba(0, 0, 0, 0.06);
-        --glass-shadow: 0 8px 32px rgba(15, 23, 42, 0.08);
+        --radius-sm: 0.375rem;
+        --radius-md: 0.625rem;
+        --radius-lg: 0.875rem;
+
         color-scheme: light;
     }
 
     .dark {
-        --color-bg: 0 0 0;
-        --color-surface: 15 17 21;
-        --color-card: 22 26 32;
-        --color-card-hover: 28 33 41;
-        --color-heading: 255 255 255;
-        --color-text: 161 167 179;
-        --color-muted: 107 114 128;
-        --color-border: 39 44 53;
+        --color-bg: 11 15 20;
+        --color-surface: 16 21 29;
+        --color-card: 23 30 40;
+        --color-card-hover: 28 36 48;
+        --color-heading: 244 246 248;
+        --color-text: 186 194 206;
+        --color-muted: 148 158 172;
+        --color-border: 42 50 64;
 
-        /* Same Royal Blue, brightening for hover on dark surfaces instead
-           of darkening. */
-        --color-accent: 48 92 222;
-        --color-accent-hover: 71 112 229;
-        --color-accent-dark: 36 73 184;
+        --color-accent: 176 131 255;
+        --color-accent-hover: 196 164 255;
+        --color-accent-dark: 122 69 240;
+        --color-violet: 154 102 255;
+        --color-gold: 247 190 87;
 
         --color-success: 34 197 94;
         --color-danger: 239 68 68;
         --color-warning: 245 158 11;
 
-        /* Glassmorphism — dark translucent surface, used selectively (see
-           .glass / .glass-strong / .glass-accent below). Kept as complete
-           rgba()/shadow strings rather than R-G-B triplets since the alpha
-           itself differs by theme, not just the base color. */
-        --glass-bg: rgba(15, 17, 21, 0.65);
-        --glass-bg-strong: rgba(10, 11, 14, 0.85);
-        --glass-border: rgba(255, 255, 255, 0.08);
-        --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.30);
         color-scheme: dark;
     }
 
@@ -82,183 +68,267 @@
     }
 
     body {
-        @apply text-brand-text antialiased;
+        @apply font-sans text-brand-text antialiased;
+        font-size: 1rem;
+        line-height: 1.7;
+        overflow-x: clip;
+    }
+
+    h1, h2, h3, h4 {
+        @apply font-display text-brand-heading;
+        text-wrap: balance;
+    }
+
+    p {
+        text-wrap: pretty;
+    }
+
+    img, svg, video, canvas, iframe {
+        max-width: 100%;
     }
 }
 
 @layer components {
-    /* Typography hierarchy - centralized so it stays consistent site-wide */
+    /* —— Layout —— */
+    .site-container {
+        @apply mx-auto w-full max-w-site px-gutter;
+    }
+
+    .section-pad {
+        padding-block: theme('spacing.section');
+    }
+
+    /* —— Typography —— */
     .h-hero {
-        @apply text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.08] tracking-tight text-brand-heading;
+        @apply font-display font-semibold tracking-[-0.02em] text-brand-heading;
+        font-size: clamp(2rem, 1.35rem + 1.8vw, 3.25rem);
+        line-height: 1.18;
     }
+
     .h-page {
-        @apply text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight text-brand-heading;
+        @apply font-display font-semibold tracking-[-0.02em] text-brand-heading;
+        font-size: clamp(1.75rem, 1.35rem + 1.4vw, 2.75rem);
+        line-height: 1.2;
     }
+
     .h-section {
-        @apply text-2xl sm:text-3xl font-bold leading-tight tracking-tight text-brand-heading;
+        @apply font-display font-semibold tracking-[-0.015em] text-brand-heading;
+        font-size: clamp(1.5rem, 1.2rem + 0.8vw, 2rem);
+        line-height: 1.25;
     }
+
     .h-subsection {
-        @apply text-lg sm:text-xl font-semibold text-brand-heading;
+        @apply font-display text-lg font-semibold tracking-[-0.015em] text-brand-heading sm:text-xl;
     }
+
     .text-body {
         @apply text-base leading-relaxed text-brand-muted;
     }
+
     .text-small {
         @apply text-sm leading-relaxed text-brand-muted;
     }
+
     .eyebrow {
-        @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-brand-accent;
+        @apply inline-flex items-center gap-2 text-sm font-medium text-brand-accent;
     }
 
-    /* Nav link — animated underline that grows from the left on hover,
-       and stays fully drawn for the active route. */
+    .brand-mark {
+        @apply font-display font-semibold tracking-[-0.03em];
+    }
+
+    /* —— Navigation —— */
+    .nav-logo-light {
+        display: block;
+    }
+
+    .nav-logo-dark {
+        display: none;
+    }
+
+    .dark .nav-logo-light {
+        display: none;
+    }
+
+    .dark .nav-logo-dark {
+        display: block;
+    }
+
+    .nav-solid.nav-overlay .nav-logo-light {
+        display: block;
+    }
+
+    .nav-solid.nav-overlay .nav-logo-dark {
+        display: none;
+    }
+
+    .dark .nav-solid.nav-overlay .nav-logo-light {
+        display: none;
+    }
+
+    .dark .nav-solid.nav-overlay .nav-logo-dark {
+        display: block;
+    }
+
     .nav-link {
-        @apply relative py-2 text-sm font-medium text-brand-text/75 transition-colors duration-200 hover:text-brand-heading;
+        @apply rounded-full px-3 py-1.5 text-sm font-medium text-brand-muted transition-colors duration-200 hover:text-brand-heading;
     }
-    .nav-link::after {
-        content: '';
-        @apply absolute inset-x-0 -bottom-0.5 h-[2px] origin-left scale-x-0 rounded-full bg-gradient-to-r from-brand-accent to-brand-accent-hover transition-transform duration-300 ease-out;
-    }
-    .nav-link:hover::after {
-        @apply scale-x-100;
-    }
+
     .nav-link-active {
+        @apply bg-brand-card text-brand-heading;
+    }
+
+    .theme-switch {
+        @apply relative inline-flex h-9 w-16 items-center rounded-full border border-brand-border bg-brand-surface p-1 transition-colors duration-200;
+    }
+
+    .theme-switch:focus-visible {
+        @apply outline outline-2 outline-offset-2 outline-brand-accent;
+    }
+
+    .theme-switch-thumb {
+        @apply pointer-events-none absolute left-1 top-1 h-7 w-7 rounded-full bg-white shadow-sm transition-transform duration-300 ease-out;
+    }
+
+    .dark .theme-switch-thumb {
+        background-color: #171E28;
+        box-shadow: 0 1px 2px rgb(0 0 0 / 0.35);
+    }
+
+    /* —— Interactive surfaces —— */
+    .rule {
+        @apply border-brand-border;
+    }
+
+    .media-frame {
+        @apply overflow-hidden rounded-[var(--radius-lg)] bg-brand-card;
+    }
+
+    .media-frame img {
+        @apply h-full w-full object-cover;
+    }
+
+    .list-row {
+        @apply border-b border-brand-border transition-colors duration-200;
+    }
+
+    .list-row:hover {
+        background-color: rgb(var(--color-card) / 0.6);
+    }
+
+    .status-pill {
+        @apply inline-flex items-center gap-1.5 rounded-[var(--radius-sm)] px-2 py-0.5 text-xs font-medium;
+    }
+
+    .status-pill-ready {
+        background-color: rgb(var(--color-accent) / 0.12);
         @apply text-brand-accent;
     }
-    .nav-link-active::after {
-        @apply scale-x-100;
-    }
-    .nav-link-on-dark {
-        @apply text-white/80 hover:text-white;
-    }
-    .nav-link-on-dark.nav-link-active {
-        @apply text-brand-accent;
+
+    .status-pill-dev {
+        @apply bg-brand-card text-brand-muted;
     }
 
-    /* Modern navigation pills in the primary header */
-    .nav-link-pill {
-        @apply relative rounded-xl px-3.5 py-2 text-sm font-semibold tracking-tight transition-all duration-200 ease-out;
-    }
-    .nav-link-pill-solid {
-        @apply text-brand-heading hover:bg-brand-accent/15 hover:text-brand-heading hover:ring-1 hover:ring-brand-accent/30;
-    }
-    .nav-link-pill-dark {
-        @apply text-white hover:bg-brand-accent hover:text-white;
-    }
-    .nav-link-pill-active.nav-link-pill-solid {
-        @apply bg-brand-accent/15 text-brand-heading shadow-soft ring-1 ring-brand-accent/35;
-    }
-    .nav-link-pill-active.nav-link-pill-dark {
-        @apply bg-brand-accent text-white shadow-soft;
-    }
-    .nav-link-pill:not(.nav-link-pill-active):hover {
-        @apply -translate-y-px;
+    .form-field {
+        @apply mt-1.5 w-full rounded-[var(--radius-md)] border border-brand-border bg-brand-surface px-4 py-3 text-sm text-brand-heading transition-colors placeholder:text-brand-muted focus:border-brand-accent focus:outline-none focus:ring-1 focus:ring-brand-accent;
     }
 
-    /* ---------------------------------------------------------------------
-       Glassmorphism — used selectively: navbar, mobile nav, floating hero
-       elements, and highlighted/featured cards. NOT applied to ordinary
-       section content or plain cards (see design brief: "glass as a depth
-       technique, not the whole design language").
-       ------------------------------------------------------------------- */
-    .glass {
-        background: var(--glass-bg);
-        backdrop-filter: blur(16px) saturate(140%);
-        -webkit-backdrop-filter: blur(16px) saturate(140%);
-        border: 1px solid var(--glass-border);
-        box-shadow: var(--glass-shadow);
-    }
-    /* More opaque variant for legibility-critical overlays (scrolled navbar,
-       mobile nav panel) — same glass language, less see-through. */
-    .glass-strong {
-        background: var(--glass-bg-strong);
-        backdrop-filter: blur(20px) saturate(140%);
-        -webkit-backdrop-filter: blur(20px) saturate(140%);
-        border: 1px solid var(--glass-border);
-        box-shadow: var(--glass-shadow);
-    }
-    /* Royal-Blue-tinted "highlighted" glass — for a single featured card or
-       selected state, not general use. */
-    .glass-accent {
-        background: rgb(var(--color-accent) / 0.10);
-        backdrop-filter: blur(16px) saturate(140%);
-        -webkit-backdrop-filter: blur(16px) saturate(140%);
-        border: 1px solid rgb(var(--color-accent) / 0.25);
-        box-shadow: 0 0 30px rgb(var(--color-accent) / 0.12), var(--glass-shadow);
-    }
-    /* Fallback for browsers without backdrop-filter support — glass
-       components stay readable as a plain translucent surface. */
-    @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-        .glass, .glass-strong {
-            background: rgb(var(--color-card) / 0.96);
-        }
+    .form-label {
+        @apply text-sm font-medium text-brand-heading;
     }
 
-    /* Subtle atmospheric blue glow behind hero content — barely visible,
-       purely decorative depth, never competes with foreground content. */
-    .atmosphere-glow {
-        background: radial-gradient(circle at 70% 30%, rgb(var(--color-accent) / 0.14), transparent 45%);
+    .btn-brand {
+        background-color: #6B3FE0;
+        color: #fff;
+    }
+
+    .btn-brand:hover {
+        background-color: #5A27D6;
+    }
+
+    .btn-ghost {
+        @apply inline-flex items-center justify-center gap-2 rounded-[var(--radius-md)] border border-brand-border bg-transparent px-5 py-3 text-sm font-semibold text-brand-heading transition-colors duration-200 hover:border-brand-accent hover:text-brand-accent;
+    }
+
+    .stage-kicker {
+        @apply text-sm font-medium text-brand-accent;
+    }
+
+    .dark .stage-kicker {
+        color: #C4A15A;
+    }
+
+    .brand-stage {
+        @apply bg-brand-bg text-brand-heading;
+    }
+
+    .brand-stage-glow {
+        display: none;
     }
 }
 
-/* Alpine hides [x-cloak] elements once it boots; without this rule the
-   attribute has no effect and pre-hydration flashes (menus, toggles) show. */
+/* Alpine cloak */
 [x-cloak] {
     display: none !important;
 }
 
-/* Scroll-reveal — smooth, professional entrance for content as it enters
-   the viewport. Variants: default (up), .reveal-scale, .reveal-left,
-   .reveal-right, .reveal-fade. Driven by [data-reveal] in app.js. */
+/* Scroll reveal */
 [x-cloak] .reveal-init,
 .reveal-init {
     opacity: 0;
-    transform: translate3d(0, 28px, 0);
+    transform: translate3d(0, 20px, 0);
     transition:
-        opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+        opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
     will-change: opacity, transform;
     backface-visibility: hidden;
 }
+
 .reveal-init.reveal-scale {
-    transform: translate3d(0, 20px, 0) scale(0.97);
+    transform: translate3d(0, 14px, 0) scale(0.985);
 }
+
 .reveal-init.reveal-left {
-    transform: translate3d(-32px, 0, 0);
+    transform: translate3d(-24px, 0, 0);
 }
+
 .reveal-init.reveal-right {
-    transform: translate3d(32px, 0, 0);
+    transform: translate3d(24px, 0, 0);
 }
+
 .reveal-init.reveal-fade {
     transform: none;
 }
+
 .reveal-init.reveal-in {
     opacity: 1;
     transform: translate3d(0, 0, 0) scale(1);
 }
 
-/* Page-header entrance (always on load) */
 @keyframes pageEnter {
     from {
         opacity: 0;
-        transform: translate3d(0, 20px, 0);
+        transform: translate3d(0, 16px, 0);
     }
     to {
         opacity: 1;
         transform: translate3d(0, 0, 0);
     }
 }
-.page-enter {
-    animation: pageEnter 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-.page-enter-delay-1 { animation-delay: 0.08s; }
-.page-enter-delay-2 { animation-delay: 0.16s; }
-.page-enter-delay-3 { animation-delay: 0.24s; }
 
-/* Product-demo mockup: cross-fading "screens" inside a browser frame. */
+.page-enter {
+    animation: pageEnter 0.75s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.page-enter-delay-1 { animation-delay: 0.07s; }
+.page-enter-delay-2 { animation-delay: 0.14s; }
+.page-enter-delay-3 { animation-delay: 0.21s; }
+
+/* Product demo */
 .demo-screen {
     transition: opacity 0.5s ease, transform 0.5s ease;
 }
+
 .demo-screen[style*='display: none'] {
     pointer-events: none;
 }
@@ -267,6 +337,7 @@
     from { transform: scaleY(0); }
     to { transform: scaleY(1); }
 }
+
 .demo-bar {
     transform-origin: bottom;
     animation: barGrow 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
@@ -276,11 +347,11 @@
     0%, 100% { opacity: 1; }
     50% { opacity: 0.55; }
 }
+
 .demo-live-dot {
     animation: dashPulse 2s ease-in-out infinite;
 }
 
-/* Dynamic icons: stroke draw on reveal, soft float, glow pulse */
 @keyframes iconDraw {
     from {
         stroke-dashoffset: 100;
@@ -291,31 +362,34 @@
         opacity: 1;
     }
 }
+
 .icon-draw path {
     stroke-dasharray: 100;
     stroke-dashoffset: 100;
 }
+
 .icon-live .icon-draw path {
     animation: iconDraw 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 @keyframes iconFloat {
     0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-6px); }
+    50% { transform: translateY(-4px); }
 }
+
 .icon-float {
     animation: iconFloat 4.5s ease-in-out infinite;
 }
 
 @keyframes glowPulse {
     0%, 100% { opacity: 0.55; transform: scale(1); }
-    50% { opacity: 1; transform: scale(1.08); }
+    50% { opacity: 1; transform: scale(1.05); }
 }
+
 .icon-glow-pulse {
     animation: glowPulse 3.2s ease-in-out infinite;
 }
 
-/* Respect users who prefer reduced motion */
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
         animation-duration: 0.01ms !important;

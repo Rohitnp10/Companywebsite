@@ -142,7 +142,7 @@ class AboutContent
             'title' => 'About Us',
             'description' => "Learn about Softrix International's mission, values, and approach to building technology solutions for businesses.",
             'keywords' => 'about Softrix International, software company, technology partner, mission, values',
-            'og_image' => asset('images/home/about-collab.jpg'),
+            'og_image' => asset('assets/social/og-image-1200x630.png'),
             'canonical' => route('about'),
         ];
     }

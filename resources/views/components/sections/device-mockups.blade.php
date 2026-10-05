@@ -4,7 +4,7 @@
     per-screen like the hero demo) — purely to sell "built for web, designed
     for mobile" without inventing a native app that doesn't exist yet.
 --}}
-<div class="relative flex items-end justify-center gap-4 sm:gap-6">
+<div class="relative flex min-w-0 max-w-full items-end justify-center gap-3 overflow-hidden sm:gap-4">
     {{-- Tablet (left, behind) --}}
     <div data-reveal data-reveal-scale data-reveal-delay="150" class="hidden w-40 shrink-0 sm:block lg:w-48" style="margin-bottom: -1rem;">
         <div class="overflow-hidden rounded-2xl border border-brand-border bg-brand-card p-2.5 shadow-soft-lg">
@@ -24,7 +24,7 @@
     </div>
 
     {{-- Desktop (center, main) --}}
-    <div data-reveal data-reveal-scale class="w-full max-w-md">
+    <div data-reveal data-reveal-scale class="min-w-0 w-full max-w-md">
         <x-sections.product-demo compact />
     </div>
 
